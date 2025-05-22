@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::paginate(10);
+        $categories = Category::orderBy('id', 'asc')->paginate(10);
         return view('layouts.pages.categories.index', compact('categories'));
     }
 
@@ -37,7 +37,7 @@ class CategoryController extends Controller
         $category->slug = Str::slug($request->input('name'));
         $category->save();
 
-        return redirect('/categories');
+        return redirect('/categories')->with('success', 'Kategori berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -63,12 +63,12 @@ class CategoryController extends Controller
         $category->slug = Str::slug($request->input('name'));
         $category->save();
 
-        return redirect('/categories');
+        return redirect('/categories')->with('success', 'Kategori berhasil diubah');
     }
 
     public function delete($id)
     {
         Category::where('id', $id)->delete();
-        return redirect('/categories');
+        return redirect('/categories')->with('success', 'Kategori berhasil dihapus');
     }
 }

@@ -15,19 +15,18 @@
 @endsection
 
 @section('content')
+    {{-- Pesan validasi --}}
+        @if ($errors->any())
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Terjadi Kesalahan!',
+                    text: '@foreach($errors->all() as $error) {{ $error }} @endforeach',
+                });
+            </script> 
+        @endif
     <div class="row">
       <div class="col">
-
-        {{-- Pesan validasi --}}
-        {{-- @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>       
-        @endif --}}
 
         <form action="/categories/store" method="POST">
             @csrf

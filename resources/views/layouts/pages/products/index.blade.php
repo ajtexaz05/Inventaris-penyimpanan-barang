@@ -7,7 +7,7 @@
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
               <li class="breadcrumb-item active">Dashboard</li>
             </ol>
           </div>
@@ -15,6 +15,15 @@
 @endsection
 
 @section('content')
+     @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '{{ session('success') }}'
+            })
+        </script>
+    @endif
     <div class="row">
       <div class="col">
         <div class="card">
@@ -34,7 +43,7 @@
                   <th>Price</th>
                   <th>Stock</th>
                   <th>Kategori</th>
-                  <th>#</th>
+                  <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -53,11 +62,14 @@
                           <form action="/products/{{ $product->id }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Hapus</button>
+                            <button type="button" class="btn btn-danger" data-target="#modal-delete-{{ $product->id }}" data-toggle="modal">
+                              Hapus
+                            </button>
                           </form>
                         </div>
                       </td>
                     </tr>
+                    @include('layouts.pages.products.delete-confirmation')
                 @endforeach
               </tbody>
             </table>

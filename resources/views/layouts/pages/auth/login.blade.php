@@ -14,6 +14,9 @@
 
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('templates/dist/css/adminlte.min.css') }}">
+
+  {{-- Sweet Alert --}}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="hold-transition login-page">
 
@@ -21,6 +24,17 @@
   <div class="login-logo">
     <a href="../../index2.html"><b>Penyimpanan </b>Barang</a>
   </div>
+
+  @if (session('error')) 
+    <script>
+      Swal.fire({
+        icon: 'info',
+        title: 'Hello User',
+        text: '{{ session('error') }}'
+      })
+    </script>
+  @endif
+
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">

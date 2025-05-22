@@ -21,7 +21,7 @@
 <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a href="/" class="brand-link">
       <img src="https://img.icons8.com/?size=100&id=4NUeu__UwtXf&format=png&color=ffffff" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light fs-3">Penyimpanan Barang</span>
     </a>
@@ -35,12 +35,12 @@
         </div>
         <div class="info">
           {{-- Akan menggunakan nama user yang sedang login --}}
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+          <a href="/" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
       <!-- SidebarSearch Form -->
-      <div class="form-inline">
+      {{-- <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
           <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
           <div class="input-group-append">
@@ -49,7 +49,7 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> --}}
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">

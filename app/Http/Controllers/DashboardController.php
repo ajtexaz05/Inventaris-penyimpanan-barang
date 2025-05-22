@@ -11,6 +11,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
+
+        if (!Auth::check()) {
+            return redirect('/login')->with('error', 'Please login first');
+        }
+
         $productCount = Product::count();
         $categoryCount = Category::count();
         return view('layouts.pages.dashboard.admin', compact('productCount', 'categoryCount'));

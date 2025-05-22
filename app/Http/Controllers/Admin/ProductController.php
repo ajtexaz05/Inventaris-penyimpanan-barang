@@ -12,7 +12,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('category')->paginate(10);
+        $products = Product::with('category')->orderBy('id', 'asc')->paginate(10);
         return view('layouts.pages.products.index', [
             'products' => $products,
         ]);
@@ -36,10 +36,17 @@ class ProductController extends Controller
             'stock' => 'required',
             'sku' => 'required',
             'category_id' => 'required',
+        ], [
+            'name.required' => 'Nama harus diisi',
+            'description.required' => 'Deskripsi harus diisi',
+            'price.required' => 'Harga harus diisi',
+            'stock.required' => 'Stok harus diisi',
+            'sku.required' => 'SKU harus diisi',
+            'category_id.required' => 'Kategori harus diisi',
         ]);
 
         $product = Product::create($validated);
-        return redirect('/products');
+        return redirect('/products')->with('success', 'Product berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -63,6 +70,13 @@ class ProductController extends Controller
             'stock' => 'required',
             'sku' => 'required',
             'category_id' => 'required',
+        ], [
+            'name.required' => 'Nama harus diisi',
+            'description.required' => 'Deskripsi harus diisi',
+            'price.required' => 'Harga harus diisi',
+            'stock.required' => 'Stok harus diisi',
+            'sku.required' => 'SKU harus diisi',
+            'category_id.required' => 'Kategori harus diisi',
         ]);
 
         $product = Product::findOrFail($id);
@@ -75,7 +89,7 @@ class ProductController extends Controller
             'category_id' => $request->input('category_id'),
         ]);
 
-        return redirect('/products');
+        return redirect('/products')->with('success', 'Product berhasil diubah');
     }
 
     public function delete($id)
@@ -83,6 +97,6 @@ class ProductController extends Controller
         $product = Product::where('id', $id);
         $product->delete();
 
-        return redirect('/products');
+        return redirect('/products')->with('success', 'Product berhasil dihapus');
     }
 }
